@@ -1,6 +1,7 @@
 ---
-import { Heart, Gift, Sparkles, CalendarHeart } from 'lucide-astro'
+import { Heart, Gift, Sparkles, CalendarHeart, Wand2 } from 'lucide-astro'
 import BirthdayItem from './BirthdayItem.astro'
+import BirthdayLockedItem from './BirthdayLockedItem.astro'
 
 const birthdays = [
   {
@@ -24,6 +25,14 @@ const birthdays = [
     icon: Sparkles,
     colorClass: 'text-amber-400',
   },
+  {
+    year: 32,
+    url: '#',
+    description: "S'està coent el nou aniversari digital...",
+    icon: Wand2,
+    colorClass: 'text-red-400',
+    isLocked: true,
+  },
 ]
 ---
 
@@ -42,17 +51,28 @@ const birthdays = [
     </h1>
   </header>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-5xl">
     {
-      birthdays.map((birthday) => (
-        <BirthdayItem
-          year={birthday.year}
-          url={birthday.url}
-          description={birthday.description}
-          icon={birthday.icon}
-          colorClass={birthday.colorClass}
-        />
-      ))
+      birthdays
+        .reverse()
+        .map((bday) =>
+          bday.isLocked ? (
+            <BirthdayLockedItem
+              year={bday.year}
+              description={bday.description}
+              icon={bday.icon}
+              colorClass={bday.colorClass}
+            />
+          ) : (
+            <BirthdayItem
+              year={bday.year}
+              url={bday.url}
+              description={bday.description}
+              icon={bday.icon}
+              colorClass={bday.colorClass}
+            />
+          ),
+        )
     }
   </div>
 </div>
