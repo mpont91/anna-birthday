@@ -1,0 +1,58 @@
+---
+import { Heart, Gift, Sparkles, CalendarHeart } from 'lucide-astro'
+import BirthdayItem from './BirthdayItem.astro'
+
+const birthdays = [
+  {
+    year: 29,
+    url: 'https://anna-29.mpont91.com',
+    description: "El primer aniversari digital, l'inici d'una tradició.",
+    icon: Heart,
+    colorClass: 'text-pink-500',
+  },
+  {
+    year: 30,
+    url: 'https://anna-30.mpont91.com',
+    description: "L'any de les Opos! El viatget per les Cinque Terre",
+    icon: Gift,
+    colorClass: 'text-teal-400',
+  },
+  {
+    year: 31,
+    url: 'https://anna-31.mpont91.com',
+    description: "L'aniversari 3D amb animalets per la taula",
+    icon: Sparkles,
+    colorClass: 'text-amber-400',
+  },
+]
+---
+
+<div class="min-h-screen flex flex-col items-center justify-center py-20 px-6">
+  <header class="text-center mb-20 max-w-2xl">
+    <div
+      class="inline-flex items-center justify-center p-4 bg-zinc-900 border border-zinc-800 rounded-2xl mb-8 shadow-lg"
+    >
+      <CalendarHeart class="w-8 h-8 text-rose-500" />
+    </div>
+
+    <h1
+      class="text-4xl md:text-5xl font-extralight tracking-tight text-white mb-6"
+    >
+      Recopilatori dels aniversaris de l'Anna!
+    </h1>
+  </header>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+    {
+      birthdays.map((birthday) => (
+        <BirthdayItem
+          year={birthday.year}
+          url={birthday.url}
+          description={birthday.description}
+          icon={birthday.icon}
+          colorClass={birthday.colorClass}
+        />
+      ))
+    }
+  </div>
+</div>
